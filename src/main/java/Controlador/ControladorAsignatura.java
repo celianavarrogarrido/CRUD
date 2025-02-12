@@ -1,9 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Controlador;
-
 
 import Clases.Asignatura;
 import DAO.AsignaturaDAO;
@@ -12,13 +7,25 @@ import jakarta.servlet.http.*;
 import java.io.IOException;
 
 public class ControladorAsignatura extends HttpServlet {
+
+    // Método para mostrar la lista de asignaturas
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        AsignaturaDAO dao = new AsignaturaDAO();
-        request.setAttribute("listaAsignaturas", dao.listarAsignaturas());
-        RequestDispatcher dispatcher = request.getRequestDispatcher("asignaturas.jsp");
-        dispatcher.forward(request, response);
+        String action = request.getParameter("action");
+        
+        if ("eliminar".equals(action)) {
+            int id = Integer.parseInt(request.getParameter("id"));
+            AsignaturaDAO dao = new AsignaturaDAO();
+            dao.eliminarAsignatura(id);
+            response.sendRedirect("ControladorAsignatura");
+        } else {
+            AsignaturaDAO dao = new AsignaturaDAO();
+            request.setAttribute("asignaturas", dao.listarAsignaturas());
+            RequestDispatcher dispatcher = request.getRequestDispatcher("asignaturas.jsp");
+            dispatcher.forward(request, response);
+        }
     }
 
+    // Método para insertar una nueva asignatura
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
         String codigo = request.getParameter("codigo");
