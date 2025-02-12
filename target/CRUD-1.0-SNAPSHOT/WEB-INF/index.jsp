@@ -1,3 +1,6 @@
+<%@ page import=".sql.*" %>
+<%@ page import="DAO.Database" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -16,9 +19,14 @@
             font-family: 'Poppins', sans-serif;
             background-color: #f4f8f9; /* Fondo claro */
         }
-       
+
+        /* Contenedor principal */
         .container {
-            margin-top: 50px;
+            margin-top: 100px; /* Incrementar el margen superior */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+            padding: 20px;
+            background-color: white;
+            border-radius: 15px;
         }
 
         .alert-info {
@@ -26,12 +34,21 @@
             color: #00796b;
         }
 
+        /* Tarjetas */
         .card {
             border: none;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             border-radius: 15px;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             transition: transform 0.3s ease; /* Agregar animación en hover */
+            opacity: 0;
+            animation: fadeIn 1s forwards; /* Animación de desvanecimiento */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
         }
 
         .card:hover {
@@ -54,10 +71,11 @@
             border-color: #00796b;
             padding: 10px 20px;
             font-size: 1rem;
+            transition: background-color 0.3s ease; /* Transición suave */
         }
 
         .btn-primary:hover {
-            background-color: #004d40; /* Verde más oscuro */
+            background-color: #004d40;
             border-color: #004d40;
         }
 
@@ -75,12 +93,18 @@
             .card-body {
                 text-align: center;
             }
+
+           /* .col-md-4 {
+                 Hacer que las tarjetas se acomoden en una sola columna
+                col-12;
+            }
+            */
         }
     </style>
 </head>
 <body>
 
-      <!-- Incluir el navbar -->
+    <!-- Incluir el navbar -->
     <%@ include file="navbar.jsp" %>
 
     <!-- Contenedor principal -->
@@ -92,7 +116,7 @@
         <!-- Opciones en formato de tarjeta -->
         <div class="row">
             <!-- Tarjeta de Asignaturas -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-12 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-book"></i> Asignaturas
@@ -104,7 +128,7 @@
                 </div>
             </div>
             <!-- Tarjeta de Resultados -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-12 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-chart-line"></i> Resultados de Aprendizaje
@@ -116,7 +140,7 @@
                 </div>
             </div>
             <!-- Tarjeta de Criterios -->
-            <div class="col-md-4 mb-4">
+            <div class="col-md-4 col-12 mb-4">
                 <div class="card">
                     <div class="card-header">
                         <i class="fas fa-list-alt"></i> Criterios de Evaluación
@@ -128,6 +152,61 @@
                 </div>
             </div>
         </div>
+
+        <!-- Lista de Asignaturas desde la base de datos -->
+        <h2>Asignaturas Disponibles</h2>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Descripción</th>
+                    <th>Fecha de Creación</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% 
+                    // Conexión a la base de datos
+                    Connection conn = null;
+                    Statement stmt = null;
+                    ResultSet rs = null;
+                    
+                    try {
+                        // Establecer la conexión con la base de datos
+                        conn = Database.getConnection();
+                        stmt = conn.createStatement();
+                        
+                        // Consulta SQL para obtener las asignaturas
+                        String sql = "SELECT * FROM asignaturas";
+                        rs = stmt.executeQuery(sql);
+                        
+                        // Mostrar los resultados de la consulta
+                        while (rs.next()) {
+                %>
+                            <tr>
+                                <td><%= rs.getInt("id") %></td>
+                                <td><%= rs.getString("nombre") %></td>
+                                <td><%= rs.getString("descripcion") %></td>
+                                <td><%= rs.getTimestamp("fecha_creacion") %></td>
+                            </tr>
+                <% 
+                        }
+                    } catch (SQLException e) {
+                        out.println("Error al conectarse a la base de datos: " + e.getMessage());
+                    } finally {
+                        // Cerrar recursos
+                        try {
+                            if (rs != null) rs.close();
+                            if (stmt != null) stmt.close();
+                            if (conn != null) conn.close();
+                        } catch (SQLException e) {
+                            out.println("Error al cerrar los recursos: " + e.getMessage());
+                        }
+                    }
+                %>
+            </tbody>
+        </table>
+
     </div>
 
     <!-- Bootstrap JS y dependencias -->

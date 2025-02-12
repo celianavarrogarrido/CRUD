@@ -12,19 +12,19 @@ package Clases;
 public class Asignatura {
     private int id;
     private String nombre;
-    private String codigo;
+    private String descripcion;
 
     public Asignatura() {}
 
     public Asignatura(int id, String nombre, String codigo) {
         this.id = id;
         this.nombre = nombre;
-        this.codigo = codigo;
+        this.descripcion = descripcion;
     }
 
     public Asignatura(String nombre, String codigo) {
         this.nombre = nombre;
-        this.codigo = codigo;
+        this.descripcion = descripcion;
     }
 
     public int getId() {
@@ -43,11 +43,11 @@ public class Asignatura {
         this.nombre = nombre;
     }
 
-    public String getCodigo() {
-        return codigo;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setCodigo(String codigo) {
-        this.codigo = codigo;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 }
