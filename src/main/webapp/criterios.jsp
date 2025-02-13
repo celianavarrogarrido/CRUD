@@ -1,18 +1,21 @@
-<%@page import="java.util.List"%>
-<%@page import="DAO.ResultadoAprendizajeDAO"%>
-<%@page import="DAO.CriterioDAO"%>
-<%@page import="Clases.CriterioEvaluacion"%>
-
-
+<%@ page import="java.util.List" %>
+<%@ page import="DAO.CriterioDAO" %>
+<%@ page import="DAO.ResultadoAprendizajeDAO" %>
+<%@ page import="Clases.CriterioEvaluacion" %>
+<%@ page import="Clases.ResultadoAprendizaje" %>
 
 <%
-    // Obtener los criterios asociados al Resultado de Aprendizaje (RA)
+    // Obtener el id del Resultado de Aprendizaje desde la URL
     int resultadoAprendizajeId = Integer.parseInt(request.getParameter("resultadoId"));
+    
+    // Crear instancias de los DAOs
     CriterioDAO criterioDAO = new CriterioDAO();
+    ResultadoAprendizajeDAO resultadoDAO = new ResultadoAprendizajeDAO();
+
+    // Obtener los criterios de evaluación asociados a este resultado de aprendizaje
     List<CriterioEvaluacion> criterios = criterioDAO.listarCriterios(resultadoAprendizajeId);
 
-    // Obtener la información del Resultado de Aprendizaje
-    ResultadoAprendizajeDAO resultadoDAO = new ResultadoAprendizajeDAO();
+    // Obtener el Resultado de Aprendizaje (RA) usando su ID
     ResultadoAprendizaje resultadoAprendizaje = resultadoDAO.obtenerResultadoPorId(resultadoAprendizajeId);
 %>
 <!DOCTYPE html>
@@ -20,7 +23,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Criterios - <%= resultadoAprendizaje.getDescripcion() %></title>
+    <title>Gestión de Criterios - <%= resultadoAprendizaje.getResultado() %></title>
 
     <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -82,7 +85,7 @@
     <!-- Contenedor principal -->
     <div class="container">
         <h1>Gestión de Criterios de Evaluación</h1>
-        <h3>Resultado de Aprendizaje: <%= resultadoAprendizaje.getDescripcion() %></h3>
+        <h3>Resultado de Aprendizaje: <%= resultadoAprendizaje.getResultado() %></h3>
 
         <!-- Tabla de Criterios -->
         <table class="table mt-4">
@@ -95,14 +98,17 @@
             </thead>
             <tbody>
                 <%
+                    // Iterar sobre los criterios de evaluación
                     for (CriterioEvaluacion criterio : criterios) {
                 %>
                 <tr>
                     <td><%= criterio.getId() %></td>
-                    <td><%= criterio.getDescripcion() %></td>
+                    <td><%= criterio.getCriterio() %></td> <!-- Se cambió a criterio.getCriterio() -->
                     <td>
-                        <a href="editarCriterio.jsp?id=<%= criterio.getId() %>" class="btn btn-warning btn-sm">Editar</a>
-                        <a href="eliminarCriterio.jsp?id=<%= criterio.getId() %>" class="btn btn-danger btn-sm">Eliminar</a>
+                        <!-- Enlace para editar el criterio -->
+                        <a href="editarCriterio.jsp?id=<%= criterio.getId() %>&resultadoId=<%= resultadoAprendizajeId %>" class="btn btn-warning btn-sm">Editar</a>
+                        <!-- Enlace para eliminar el criterio -->
+                        <a href="eliminarCriterio.jsp?id=<%= criterio.getId() %>&resultadoId=<%= resultadoAprendizajeId %>" class="btn btn-danger btn-sm">Eliminar</a>
                     </td>
                 </tr>
                 <%

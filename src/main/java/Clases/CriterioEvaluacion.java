@@ -1,27 +1,18 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
-/**
- *
- * @author DAW2
- */
 public class CriterioEvaluacion {
     private int id;
-    private String descripcion;
-    private int resultadoAprendizajeId;
+    private String criterio;
+    private int idAsignatura;
 
     // Constructor vacío
-    public CriterioEvaluacion() {
-    }
+    public CriterioEvaluacion() {}
 
     // Constructor con parámetros
-    public CriterioEvaluacion(int id, String descripcion, int resultadoAprendizajeId) {
+    public CriterioEvaluacion(int id, String criterio, int idAsignatura) {
         this.id = id;
-        this.descripcion = descripcion;
-        this.resultadoAprendizajeId = resultadoAprendizajeId;
+        this.criterio = criterio;
+        this.idAsignatura = idAsignatura;
     }
 
     // Getters y Setters
@@ -33,29 +24,28 @@ public class CriterioEvaluacion {
         this.id = id;
     }
 
-    public String getDescripcion() {
-        return descripcion;
+    public String getCriterio() {
+        return criterio;
     }
 
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
+    public void setCriterio(String criterio) {
+        this.criterio = criterio;
     }
 
-    public int getResultadoAprendizajeId() {
-        return resultadoAprendizajeId;
+    public int getIdAsignatura() {
+        return idAsignatura;
     }
 
-    public void setResultadoAprendizajeId(int resultadoAprendizajeId) {
-        this.resultadoAprendizajeId = resultadoAprendizajeId;
+    public void setIdAsignatura(int idAsignatura) {
+        this.idAsignatura = idAsignatura;
     }
 
-    // Método toString (opcional, pero útil para depuración)
     @Override
     public String toString() {
         return "CriterioEvaluacion{" +
-                "id=" + id +
-                ", descripcion='" + descripcion + '\'' +
-                ", resultadoAprendizajeId=" + resultadoAprendizajeId +
-                '}';
+               "id=" + id +
+               ", criterio='" + criterio + '\'' +
+               ", idAsignatura=" + idAsignatura +
+               '}';
     }
 }

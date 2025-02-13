@@ -7,20 +7,22 @@ import java.util.List;
 
 public class AsignaturaDAO {
 
-    public List<Asignatura> listarAsignaturas() {
-        List<Asignatura> asignaturas = new ArrayList<>();
-        try (Connection con = Database.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM asignaturas");  // Se asegura de que es 'asignaturas'
-             ResultSet rs = ps.executeQuery()) {
-
-            while (rs.next()) {
-                asignaturas.add(new Asignatura(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion")));
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+  public List<Asignatura> listarAsignaturas() {
+    List<Asignatura> asignaturas = new ArrayList<>();
+    try (Connection con = Database.getConnection();
+         PreparedStatement ps = con.prepareStatement("SELECT * FROM asignaturas");
+         ResultSet rs = ps.executeQuery()) {
+        
+        while (rs.next()) {
+            Asignatura asignatura = new Asignatura(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion"));
+            asignaturas.add(asignatura);
+            System.out.println("Asignatura encontrada: " + asignatura.getId() + " - " + asignatura.getNombre());
         }
-        return asignaturas;
+    } catch (Exception e) {
+        e.printStackTrace();
     }
+    return asignaturas;
+}
 
     public void insertarAsignatura(Asignatura asignatura) {
         try (Connection con = Database.getConnection();

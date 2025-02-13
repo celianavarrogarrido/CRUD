@@ -1,11 +1,12 @@
 DAO\AsignaturaDAO.class
-DAO\ResultadoAprendizajeDAO.class
 Clases\Asignatura.class
 Controlador\ControladorResultado.class
+Controlador\ControladorCriterio.class
+Controlador\ControladorAsignatura.class
+com\mycompany\crud\resources\JakartaEE11Resource.class
+DAO\Database.class
+Clases\ResultadoAprendizaje.class
+DAO\ResultadoAprendizajeDAO.class
 com\mycompany\crud\JakartaRestConfiguration.class
 Clases\CriterioEvaluacion.class
-Controlador\ControladorAsignatura.class
 DAO\CriterioDAO.class
-com\mycompany\crud\resources\JakartaEE11Resource.class
-Clases\ResultadoApredizaje.class
-DAO\Database.class

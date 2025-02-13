@@ -25,7 +25,7 @@
             transition: color 0.3s ease; /* Transición suave para los enlaces */
         }
         .navbar .nav-link:hover {
-            color: #fff5e6 !important; /* Efecto hover suave */
+            color: #bb8fce !important; /* Efecto hover morado */
         }
         .navbar .navbar-brand img {
             max-width: 120px;  /* Tamaño de la imagen */
