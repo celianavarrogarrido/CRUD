@@ -39,16 +39,16 @@ public class ControladorAsignatura extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String nombre = request.getParameter("nombre");
-        String codigo = request.getParameter("codigo");
-        
+        String descripcion = request.getParameter("descripcion");
+
         try {
-            if (nombre != null && !nombre.isEmpty() && codigo != null && !codigo.isEmpty()) {
-                Asignatura asignatura = new Asignatura(nombre, codigo);
+            if (nombre != null && !nombre.isEmpty() && descripcion != null && !descripcion.isEmpty()) {
+                Asignatura asignatura = new Asignatura(nombre, descripcion);
                 AsignaturaDAO dao = new AsignaturaDAO();
                 dao.insertarAsignatura(asignatura);
                 request.setAttribute("mensaje", "Asignatura agregada con éxito.");
             } else {
-                request.setAttribute("mensaje", "El nombre y el código de la asignatura son obligatorios.");
+                request.setAttribute("mensaje", "El nombre y la descripción de la asignatura son obligatorios.");
             }
         } catch (Exception e) {
             request.setAttribute("mensaje", "Error al agregar asignatura: " + e.getMessage());

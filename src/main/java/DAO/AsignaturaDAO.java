@@ -1,10 +1,5 @@
 package DAO;
 
-/**
- *
- * @author Celia Navarro Garrido
- */
-
 import Clases.Asignatura;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,11 +10,11 @@ public class AsignaturaDAO {
     public List<Asignatura> listarAsignaturas() {
         List<Asignatura> asignaturas = new ArrayList<>();
         try (Connection con = Database.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM asignaturas");
+             PreparedStatement ps = con.prepareStatement("SELECT * FROM asignaturas");  // Se asegura de que es 'asignaturas'
              ResultSet rs = ps.executeQuery()) {
 
             while (rs.next()) {
-                asignaturas.add(new Asignatura(rs.getInt("id"), rs.getString("nombre"), rs.getString("codigo")));
+                asignaturas.add(new Asignatura(rs.getInt("id"), rs.getString("nombre"), rs.getString("descripcion")));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -29,7 +24,7 @@ public class AsignaturaDAO {
 
     public void insertarAsignatura(Asignatura asignatura) {
         try (Connection con = Database.getConnection();
-             PreparedStatement ps = con.prepareStatement("INSERT INTO asignaturas (nombre, descripcion) VALUES (?, ?)")) {
+             PreparedStatement ps = con.prepareStatement("INSERT INTO asignaturas (nombre, descripcion) VALUES (?, ?)")) { // 'asignaturas' en lugar de 'asignatura'
             ps.setString(1, asignatura.getNombre());
             ps.setString(2, asignatura.getDescripcion());
             ps.executeUpdate();
@@ -40,35 +35,34 @@ public class AsignaturaDAO {
 
     public void eliminarAsignatura(int id) {
         try (Connection con = Database.getConnection();
-             PreparedStatement ps = con.prepareStatement("DELETE FROM asignaturas WHERE id = ?")) {
+             PreparedStatement ps = con.prepareStatement("DELETE FROM asignaturas WHERE id = ?")) {  // Asegúrate de que es 'asignaturas'
             ps.setInt(1, id);
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    
-    public Asignatura obtenerPorId(int id) {
-    Asignatura asignatura = null;
-    String sql = "SELECT * FROM asignaturas WHERE id = ?";
-    
-    try (Connection conn = Database.getConnection();
-         PreparedStatement stmt = conn.prepareStatement(sql)) {
-        
-        stmt.setInt(1, id);
-        ResultSet rs = stmt.executeQuery();
-        
-        if (rs.next()) {
-            asignatura = new Asignatura(
-                rs.getInt("id"),
-                rs.getString("nombre"),
-                rs.getString("descripcion")
-            );
-        }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }
-    return asignatura;
-}
 
+    public Asignatura obtenerPorId(int id) {
+        Asignatura asignatura = null;
+        String sql = "SELECT * FROM asignaturas WHERE id = ?";  // 'asignaturas' aquí también
+        
+        try (Connection conn = Database.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+            
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            
+            if (rs.next()) {
+                asignatura = new Asignatura(
+                    rs.getInt("id"),
+                    rs.getString("nombre"),
+                    rs.getString("descripcion")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return asignatura;
+    }
 }

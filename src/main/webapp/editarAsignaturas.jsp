@@ -1,4 +1,6 @@
-<%@ page import="clases.Asignatura, dao.AsignaturaDAO" %>
+<%@page import="Clases.Asignatura"%>
+<%@page import="DAO.AsignaturaDAO"%>
+
 <%
     int id = Integer.parseInt(request.getParameter("id"));
     AsignaturaDAO dao = new AsignaturaDAO();
@@ -18,10 +20,7 @@
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" class="form-control" name="nombre" value="<%= asignatura.getNombre() %>" required>
             </div>
-            <div class="mb-3">
-                <label for="codigo" class="form-label">Código</label>
-                <input type="text" class="form-control" name="codigo" value="<%= asignatura.getCodigo() %>" required>
-            </div>
+          
             <button type="submit" class="btn btn-success">Guardar Cambios</button>
             <a href="ControladorAsignatura" class="btn btn-secondary">Cancelar</a>
         </form>

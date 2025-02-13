@@ -1,6 +1,9 @@
-<%@ page import="dao.CriterioDAO, java.util.List, model.CriterioEvaluacion" %>
-<%@ page import="dao.ResultadoAprendizajeDAO" %>
-<%@ page import="model.ResultadoAprendizaje" %>
+<%@page import="java.util.List"%>
+<%@page import="DAO.ResultadoAprendizajeDAO"%>
+<%@page import="DAO.CriterioDAO"%>
+<%@page import="Clases.CriterioEvaluacion"%>
+
+
 
 <%
     // Obtener los criterios asociados al Resultado de Aprendizaje (RA)

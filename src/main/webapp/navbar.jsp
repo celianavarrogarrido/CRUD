@@ -1,10 +1,9 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PÃ¡gina de Inicio</title>
+    <title>Página de Inicio</title>
     <!-- Bootstrap 5.3 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Estilos personalizados (opcional) -->
@@ -23,14 +22,14 @@
         }
         .navbar .navbar-brand, .navbar .nav-link {
             color: #ffffff !important;
-            transition: color 0.3s ease; /* TransiciÃ³n suave para los enlaces */
+            transition: color 0.3s ease; /* Transición suave para los enlaces */
         }
         .navbar .nav-link:hover {
             color: #fff5e6 !important; /* Efecto hover suave */
         }
         .navbar .navbar-brand img {
-            max-width: 120px;  /* TamaÃ±o de la imagen */
-            height: auto;      /* Mantener la proporciÃ³n de la imagen */
+            max-width: 120px;  /* Tamaño de la imagen */
+            height: auto;      /* Mantener la proporción de la imagen */
         }
         .navbar .navbar-nav {
             margin-left: auto; /* Centrar los elementos a la derecha */
@@ -43,7 +42,7 @@
             background-color: #ffffff;
         }
 
-        /* Estilos para dispositivos mÃ³viles */
+        /* Estilos para dispositivos móviles */
         @media (max-width: 768px) {
             .navbar .navbar-nav {
                 text-align: center;
@@ -57,10 +56,10 @@
 </head>
 <body>
 
-     <!-- Barra de navegaciÃ³n -->
+     <!-- Barra de navegación -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container-fluid">
-            <!-- AquÃ­ estÃ¡ la imagen centrada -->
+            <!-- Aquí está la imagen centrada -->
             <a class="navbar-brand" href="#">
                 <img src="images/logo_gestion.png" alt="logo gestor" />
             </a>
@@ -70,17 +69,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">Inicio</a>
+                        <a class="nav-link active" href="index.jsp">Inicio</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="asignaturas.jsp">Asignaturas</a>
+                        <a class="nav-link" href="asignaturas.jsp">Asignaturas</a> <!-- Enlace actualizado -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="resultados.jsp">R.A</a>
+                        <a class="nav-link" href="resultados.jsp">R.A</a> <!-- Enlace actualizado -->
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="criterios.jsp">Criterios</a>
-                    </li>
+                        <a class="nav-link" href="criterios.jsp">Criterios</a> 
                 </ul>
             </div>
         </div>

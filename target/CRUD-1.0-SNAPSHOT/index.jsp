@@ -1,4 +1,8 @@
-<%@ page import=".sql.*" %>
+
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
 <%@ page import="DAO.Database" %>
 
 <!DOCTYPE html>
@@ -103,10 +107,7 @@
     </style>
 </head>
 <body>
-
-    <!-- Incluir el navbar -->
     <%@ include file="navbar.jsp" %>
-
     <!-- Contenedor principal -->
     <div class="container">
         <div class="alert alert-info" role="alert">

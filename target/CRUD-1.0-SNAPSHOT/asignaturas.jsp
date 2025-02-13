@@ -1,5 +1,13 @@
 <%@page contentType="text/html; charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%@ page import="DAO.Database" %>
+
+
+<!-- Incluir el navbar -->
+<%@ include file="navbar.jsp" %>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -12,18 +20,12 @@
 <body>
     <div class="container mt-5">
         <h1>Gestión de Asignaturas</h1>
-        
-        <!-- Mostrar mensaje si hay alguna asignatura eliminada o agregada -->
-        <c:if test="${not empty mensaje}">
-            <div class="alert alert-success">${mensaje}</div>
-        </c:if>
-
         <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Código</th>
+                    <th>Descripción</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
@@ -31,9 +33,9 @@
                 <!-- Iteramos sobre las asignaturas con JSTL -->
                 <c:forEach var="asignatura" items="${asignaturas}">
                     <tr>
-                        <td>${asignatura.id}</td>
-                        <td>${asignatura.nombre}</td>
-                        <td>${asignatura.codigo}</td>
+                        <td>${asignatura.id}</td> <!-- Se mantiene el 'id' -->
+                        <td>${asignatura.nombre}</td> <!-- Se mantiene el 'nombre' -->
+                        <td>${asignatura.descripcion}</td> <!-- Se mantiene la 'descripcion' -->
                         <td>
                             <!-- Enlace de edición -->
                             <a href="editarAsignaturas.jsp?id=${asignatura.id}" class="btn btn-warning btn-sm">Editar</a>

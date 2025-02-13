@@ -1,32 +1,32 @@
-
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Clases;
 
 /**
- *
- * @author  Celia Navarro Garrido
+ * Clase que representa una asignatura.
+ * 
+ * @author Celia Navarro Garrido
  */
 public class Asignatura {
     private int id;
     private String nombre;
     private String descripcion;
 
+    // Constructor por defecto
     public Asignatura() {}
 
-    public Asignatura(int id, String nombre, String codigo) {
+    // Constructor con id, nombre y descripcion (según la base de datos)
+    public Asignatura(int id, String nombre, String descripcion) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
-    public Asignatura(String nombre, String codigo) {
+    // Constructor sin id (usado al insertar una nueva asignatura)
+    public Asignatura(String nombre, String descripcion) {
         this.nombre = nombre;
         this.descripcion = descripcion;
     }
 
+    // Getters y setters para cada campo
     public int getId() {
         return id;
     }
